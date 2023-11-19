@@ -10,15 +10,15 @@
   "author": "fderen-dev",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.6.1",
+    "axios": "^1.6.2",
     "cheerio": "1.0.0-rc.12",
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@types/node": "^20.9.0",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "eslint": "^8.53.0",
+    "@types/node": "^20.9.2",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint": "^8.54.0",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1"
   }

@@ -1,25 +1,7 @@
 import bodyParser from 'body-parser';
 import express from 'express';
-import { chromium } from 'playwright';
 
-async function getPage(url: string): Promise<{ page: any; browser: any; context: any }> {
-  const browser = await chromium.launch();
-  const context = await browser.newContext({
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' + ' AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
-  });
-  const page = await context.newPage();
-  await page.goto(url);
-
-  return { page, browser, context };
-}
-
-async function scrap(url: string, selector: string): Promise<string> {
-  const { page, browser } = await getPage(url);
-  const text = (await page.$eval(selector, (el: any) => el.textContent)) as string;
-  await browser.close();
-
-  return text;
-}
+import { ScrapService } from './services/scrapService';
 
 // async function scrapUrls(pageUrl: string, listSelector: string): Promise<string[]> {
 //   const { page, browser } = await getPage(pageUrl);
@@ -47,6 +29,7 @@ async function scrap(url: string, selector: string): Promise<string> {
 // -d '{"url": "https://www.masterborn.com/career", "selector": "main #positions a"}'
 
 (async () => {
+  const ScrapServiceInstance = new ScrapService();
   const app = express();
   const port = 3000;
 
@@ -64,7 +47,7 @@ async function scrap(url: string, selector: string): Promise<string> {
     }
 
     try {
-      const text = await scrap(url, selector);
+      const text = await ScrapServiceInstance.scrap(url, selector);
 
       res.status(200).send(text);
     } catch (error) {

@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 
+import { connectDatabase } from './config/connectDatabase';
 import { ScrapService } from './services/scrapService';
 
 // async function scrapUrls(pageUrl: string, listSelector: string): Promise<string[]> {
@@ -37,6 +38,7 @@ import { ScrapService } from './services/scrapService';
   app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
   });
+  connectDatabase();
 
   app.post('/api/scrap', async (req, res) => {
     const { url, selector } = req.body;
